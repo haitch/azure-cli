@@ -10959,6 +10959,7 @@ class AKSManagedClusterUpdateDecoratorTestCase(unittest.TestCase):
         premiumCluster = self.models.ManagedCluster(
             location="test_location", 
             support_plan=None,
+            kubernetes_version="1.27",
             sku=premiumSKU,
         )
         ltsDecorator.context.attach_mc(premiumCluster)
@@ -10971,6 +10972,7 @@ class AKSManagedClusterUpdateDecoratorTestCase(unittest.TestCase):
         expectedLTSCluster = self.models.ManagedCluster(
             location="test_location",
             support_plan="AKSLongTermSupport",
+            kubernetes_version="1.27",
             sku=premiumSKU,
         )
         self.assertEqual(ltsClusterCalculated, expectedLTSCluster)
@@ -10988,6 +10990,7 @@ class AKSManagedClusterUpdateDecoratorTestCase(unittest.TestCase):
         expectedNonLTSCluster = self.models.ManagedCluster(
             location="test_location",
             support_plan="KubernetesOfficial",
+            kubernetes_version="1.27",
             sku=premiumSKU,
         )
         self.assertEqual(nonLTSClusterCalculated, expectedNonLTSCluster)
@@ -11007,6 +11010,7 @@ class AKSManagedClusterUpdateDecoratorTestCase(unittest.TestCase):
         ltsCluster = self.models.ManagedCluster(
             location="test_location", 
             sku=premiumSKU,
+            kubernetes_version="1.27",
             support_plan="AKSLongTermSupport",
         )
         noopDecorator.context.attach_mc(ltsCluster)
@@ -11031,6 +11035,7 @@ class AKSManagedClusterUpdateDecoratorTestCase(unittest.TestCase):
         expectedNonLTSCluster = self.models.ManagedCluster(
             location="test_location",
             support_plan="KubernetesOfficial",
+            kubernetes_version="1.27",
             sku=premiumSKU,
         )
         self.assertEqual(nonLTSClusterCalculated, expectedNonLTSCluster)
@@ -11040,6 +11045,7 @@ class AKSManagedClusterUpdateDecoratorTestCase(unittest.TestCase):
             sku=self.models.ManagedClusterSKU(
                 name="Base",
                 tier="Standard"),
+            kubernetes_version="1.27",
             support_plan="KubernetesOfficial",
         )
         noopDecorator3 = AKSManagedClusterUpdateDecorator(
